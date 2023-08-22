@@ -1,22 +1,15 @@
 export function CountCats() {
-  const countCats = 1
 
-  function getCats() {
-    const cats = []
-    for(let i = 0; i < countCats; i++) {
-        cats.push("🐈 ")
-    }
-    return cats
-  }
+  const cats = ["🐈"].length;
 
   return (
     <>
     <h2>useState</h2>
 
-    <p>{getCats()}</p>
+    <p>{cats}</p>
 
     <button>
-      There are {countCats} cats 🥳
+      There are ... cats 🥳
     </button>
     </>
   );
