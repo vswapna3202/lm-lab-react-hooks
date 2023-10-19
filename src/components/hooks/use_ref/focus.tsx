@@ -10,7 +10,7 @@ export const Focus: React.FC = () => {
 
   return (
     <div>
-      <input type="text" />
+      <input ref={inputRef} type="text" />
       <button onClick={handleClick}>Focus Input</button>
     </div>
   );
