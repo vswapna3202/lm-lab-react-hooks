@@ -1,20 +1,29 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 export const MemoExample = () => {
 
 	console.log("Rendering component...")
 
-	const [numberObj, setNumberObj] = useState({ input: 0 });
-	
-	const doubleNumber = slowFunction(numberObj.input)
+	const [numberObjThree, setNumberObjThree] = useState({ input: 0 });
+	const [numberObjTwo, setNumberObjTwo] = useState({ input: 0 });
+	//const doubleNumber = slowFunction(numberObj.input)
+	const doubleNumberThree = useMemo(() => { 
+			return slowFunction(numberObjThree.input)
+		}, [numberObjThree.input] 
+	);
+	const doubleNumberTwo = useMemo(() => { 
+		return slowFunction(numberObjTwo.input)
+	}, [numberObjTwo.input] 
+);
 
 	return (
 		<>
 			<h2>useMemo</h2>
 
-			<button onClick={() => setNumberObj({ input: 3 })}>Double 3</button>
-
-			<p className='use-memo__text'>{doubleNumber}</p>
+			<button onClick={() => setNumberObjThree({ input: 3 })}>Double 3</button>
+			<button onClick={() => setNumberObjTwo({input: 2})}>Double 2</button>
+			<p className='use-memo__text'>{doubleNumberThree}</p>
+			<p className='use-memo__text'>{doubleNumberTwo}</p>
 		</>
 	);
 };
@@ -25,6 +34,7 @@ function slowFunction(num: number) {
 		// ⏰
 	}
 	const result = num * 2;
+	console.log(num);
 	console.log(`result: ${result}`);
 	return result;
 }
