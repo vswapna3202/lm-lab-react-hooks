@@ -49,7 +49,12 @@ export const TaskDisplay: React.FC<{
 					onClick={() => setIsEditing(!isEditing)}>
 					Edit
 				</button>
-				<button className='task-list__button'>Delete</button>
+				{/*<button className='task-list__button'>Delete</button>*/}
+				<button
+					className='task-list__button'
+					onClick={() => onDelete(task.id)}>
+					Delete
+				</button>
 			</label>
 		);
 	}
