@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import SwapiAPICall from "./custom_swapi_api_props";
 
-interface swapiPeopleData{
+export interface swapiPeopleData{
     name: string;
     birthYear: string;
     gender: string;
@@ -9,7 +10,7 @@ interface swapiPeopleData{
     starships: Array<string>;
 }
 
-const SwapiAPICall = () => {
+const SwapiAPICallContainer = () => {
     const[swapiResults,setSwapiResults] = useState<Array<swapiPeopleData>>([]);
     useEffect(() => {
         const url = "https://swapi.dev/api/people/";
@@ -24,32 +25,7 @@ const SwapiAPICall = () => {
         }
         getSwapiJSON(url);
     },[]);
-    return(
-        <>
-        <h2>Swapi API Call</h2>
-        {swapiResults && swapiResults.length > 0 ? (
-            swapiResults.map((person, index) => (
-                <div key={index} className='list__item'>
-                    <p className='label-container'>Name: {person.name}</p>
-                    <p className='label-container'>Birth Year: {person.birthYear}</p>
-                    <p className='label-container'>Gender: {person.gender}</p>
-                    <p className='label-container'>Height: {person.height}</p>
-                    <p className='label-container'>Mass: {person.mass}</p>
-                    {person.starships && person.starships.length > 0 && (
-                        <ul>
-                            {person.starships.map((starship,idx) => (
-                                <li key={idx} >
-                                    <a href={starship}>{starship}</a>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            ))
-        ) : <div className='list__item'>Loading...</div>
-            }
-        </>
-    );
+    return <SwapiAPICall data={swapiResults} />    
 }
 
-export default SwapiAPICall;
+export default SwapiAPICallContainer;
